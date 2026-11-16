@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#edf0f3">
+    <meta name="description"
+        content="SanGain | kalkulator estimasi profit dan loss saham Indonesia setelah biaya transaksi.">
+    <title>SanGain | Kalkulator Profit Saham</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/calculator.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="brand" href="#" aria-label="SanGain beranda">SanGain</a>
+
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode">
+            <span aria-hidden="true">☾</span>
+        </button>
+    </header>
+
+    <main class="page">
+        <section class="intro">
+            <div>
+                <h1>Hitung hasil investasimu.</h1>
+                <p class="intro-copy">
+                    Simulasikan potensi profit atau loss saham dengan memperhitungkan biaya transaksi.
+                </p>
+            </div>
+
+            <button class="button reset-button" id="resetBtn" type="button">
+                <span aria-hidden="true">↺</span> Reset
+            </button>
+        </section>
+
+        <section class="workspace">
+            <div class="workspace-main">
+                <section class="panel input-panel" aria-labelledby="inputHeading">
+                    <div class="panel-heading">
+                        <h2 id="inputHeading">Detail transaksi</h2>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <h3>Pembelian</h3>
+                            <p>Harga dan jumlah saham yang dibeli</p>
+                        </div>
+
+                        <div class="field-grid">
+                            <label class="field field-wide">
+                                <span>Harga beli <small>per lembar</small></span>
+                                <div class="input-wrap">
+                                    <b>Rp</b>
+                                    <input id="buyPrice" type="number" min="1" step="1" value="1000"
+                                        inputmode="numeric">
+                                </div>
+                            </label>
+
+                            <label class="field">
+                                <span>Jumlah lot</span>
+                                <div class="input-wrap">
+                                    <input id="lots" type="number" min="1" step="1" value="10" inputmode="numeric">
+                                    <b>lot</b>
+                                </div>
+                            </label>
+
+                            <label class="field">
+                                <span>Fee beli</span>
+                                <div class="input-wrap">
+                                    <input id="buyFee" type="number" min="0" max="100" step="0.01" value="0.15"
+                                        inputmode="decimal">
+                                    <b>%</b>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <h3>Penjualan</h3>
+                            <p>Estimasi harga saat saham dijual</p>
+                        </div>
+
+                        <div class="field-grid">
+                            <label class="field field-wide">
+                                <span>Harga jual <small>per lembar</small></span>
+                                <div class="input-wrap">
+                                    <b>Rp</b>
+                                    <input id="sellPrice" type="number" min="1" step="1" value="1100"
+                                        inputmode="numeric">
+                                </div>
+                            </label>
+
+                            <label class="field">
+                                <span>Fee jual</span>
+                                <div class="input-wrap">
+                                    <input id="sellFee" type="number" min="0" max="100" step="0.01" value="0.25"
+                                        inputmode="decimal">
+                                    <b>%</b>
+                                </div>
+                            </label>
+
+                            <div class="field hint-field">
+                                <span>Konversi saham</span>
+                                <div class="hint-value">1 lot = 100 lembar</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="validation" id="validation" role="alert" aria-live="polite"></p>
+                </section>
+
+                <section class="tools-panel" aria-labelledby="toolsHeading">
+                    <div class="section-heading">
+                        <h2 id="toolsHeading">Analisis harga</h2>
+                        <p>Temukan target jual dan lihat berbagai kemungkinan skenario.</p>
+                    </div>
+
+                    <div class="tools-grid">
+                        <section class="tool-card">
+                            <div class="tool-title">
+                                <div>
+                                    <h3>Target profit</h3>
+                                    <p>Harga jual untuk mencapai target return bersih</p>
+                                </div>
+                            </div>
+
+                            <label class="field target-field">
+                                <span>Target net return</span>
+                                <div class="input-wrap">
+                                    <select id="targetRate">
+                                        <option value="5">5%</option>
+                                        <option value="10" selected>10%</option>
+                                        <option value="15">15%</option>
+                                        <option value="20">20%</option>
+                                        <option value="custom">Custom</option>
+                                    </select>
+                                </div>
+                            </label>
+
+                            <label class="field custom-target" id="customTargetField" hidden>
+                                <span>Target custom</span>
+                                <div class="input-wrap">
+                                    <input id="customTarget" type="number" min="0" max="10000" step="0.1" value="12">
+                                    <b>%</b>
+                                </div>
+                            </label>
+
+                            <div class="tool-output">
+                                <span>Harga jual yang diperlukan</span>
+                                <strong id="targetPrice">Rp 0</strong>
+                                <small id="targetCaption">Untuk mencapai target net return 10%</small>
+                            </div>
+                        </section>
+
+                        <section class="tool-card">
+                            <div class="tool-title">
+                                <div>
+                                    <h3>Break-even price</h3>
+                                    <p>Harga jual minimum agar tidak rugi setelah biaya</p>
+                                </div>
+                            </div>
+
+                            <div class="tool-output breakeven-output">
+                                <span>Harga impas per lembar</span>
+                                <strong id="breakEvenPrice">Rp 0</strong>
+                                <small id="breakEvenCaption">Net profit = Rp 0</small>
+                            </div>
+
+                            <p class="mini-note">
+                                Harga dibulatkan ke atas ke rupiah penuh agar estimasi tidak berada di bawah titik
+                                impas.
+                            </p>
+                        </section>
+                    </div>
+                </section>
+            </div>
+
+            <section class="panel result-panel" aria-labelledby="resultHeading">
+                <div class="panel-heading">
+                    <h2 id="resultHeading">Ringkasan hasil</h2>
+                </div>
+
+                <div class="profit-card" id="profitCard">
+                    <div class="profit-card-top">
+                        <span id="resultLabel">Net Profit</span>
+                        <span class="result-chip" id="resultChip">Profit</span>
+                    </div>
+
+                    <div class="profit-amount" id="netProfit">+Rp 0</div>
+
+                    <div class="return-line">
+                        <span>Net return</span>
+                        <strong id="netReturn">+0,00%</strong>
+                    </div>
+
+                    <div class="progress-track">
+                        <div class="progress-bar" id="returnBar"></div>
+                    </div>
+
+                    <p class="profit-foot" id="profitFoot">
+                        Setiap perubahan input akan memperbarui hasil.
+                    </p>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span>Total modal</span>
+                        <strong id="totalCapital">Rp 0</strong>
+                        <small>Termasuk biaya beli</small>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>Hasil penjualan</span>
+                        <strong id="saleProceeds">Rp 0</strong>
+                        <small>Setelah biaya jual</small>
+                    </div>
+                </div>
+
+                <details class="breakdown" open>
+                    <summary>Rincian perhitungan</summary>
+
+                    <div class="breakdown-list">
+                        <div>
+                            <span>Nilai pembelian bruto</span>
+                            <strong id="buyGross">Rp 0</strong>
+                        </div>
+
+                        <div>
+                            <span>Fee beli</span>
+                            <strong id="buyFeeValue">Rp 0</strong>
+                        </div>
+
+                        <div>
+                            <span>Nilai penjualan bruto</span>
+                            <strong id="sellGross">Rp 0</strong>
+                        </div>
+
+                        <div>
+                            <span>Fee jual</span>
+                            <strong id="sellFeeValue">Rp 0</strong>
+                        </div>
+
+                        <div class="breakdown-total">
+                            <span>Total biaya transaksi</span>
+                            <strong id="totalCosts">Rp 0</strong>
+                        </div>
+
+                        <div class="breakdown-final">
+                            <span>Capital gain/loss sebelum fee</span>
+                            <strong id="grossGain">Rp 0</strong>
+                        </div>
+
+                        <div class="breakdown-final">
+                            <span>Keuntungan / kerugian bersih</span>
+                            <strong id="netProfitDetail">Rp 0</strong>
+                        </div>
+                    </div>
+                </details>
+
+                <p class="result-note">
+                    Perhitungan merupakan estimasi berdasarkan input dan asumsi biaya di atas.
+                    Hasil aktual dapat berbeda sesuai tarif fee broker dan kebijakan sekuritas yang digunakan.
+                </p>
+            </section>
+        </section>
+
+        <section class="tools-section">
+            <section class="panel simulation-panel">
+                <div class="simulation-heading">
+                    <div class="tool-title">
+                        <div>
+                            <h3>Quick profit simulation</h3>
+                            <p>Simulasi perubahan harga jual dari harga beli</p>
+                        </div>
+                    </div>
+
+                    <span class="simulation-meta">Berdasarkan harga beli</span>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Perubahan harga</th>
+                                <th scope="col">Estimasi harga jual</th>
+                                <th scope="col">Net profit / loss</th>
+                                <th scope="col">Net return</th>
+                            </tr>
+                        </thead>
+                        <tbody id="simulationRows"></tbody>
+                    </table>
+                </div>
+
+                <div class="mobile-scenarios" id="mobileScenarios"></div>
+            </section>
+        </section>
+        <footer class="footer">
+            <p>© 2026 SanGain. All rights reserved.</p>
+            <span>For informational purposes only. Not financial advice.</span>
+        </footer>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

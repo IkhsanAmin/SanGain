@@ -1,0 +1,95 @@
+/* Page structure */
+body {
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.45;
+  font-family: var(--font-base);
+}
+
+.topbar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(16px, calc((100% - 1080px) / 2 + 16px));
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 16px 24px;
+}
+
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.intro h1 {
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Input and result share one bordered sheet */
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.workspace-main { display: flex; flex-direction: column; min-width: 0; }
+
+.workspace .panel {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.workspace > .result-panel {
+  background: var(--surface-2);
+  border-left: 1px solid var(--border);
+}
+
+.panel-heading h2,
+.section-heading h2 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.tools-section { margin-top: 12px; }
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.footer {
+  padding: 20px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.intro-copy {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+}

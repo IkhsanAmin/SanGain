@@ -1,0 +1,67 @@
+:root {
+  color-scheme: light;
+
+  --font-base: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Surfaces */
+  --bg: #e1ecf7;
+  --surface: #f8f9fb;
+  --surface-2: #f8f9fb;
+
+  /* Text */
+  --text: #101828;
+  --text-secondary: #344054;
+  --muted: #586174;
+
+  /* Brand */
+  --primary: #71a5de;
+  --primary-soft: #e1ecf7;
+
+  /* Result states (tidak berubah) */
+  --profit: #0b7d54;
+  --profit-soft: #e3f6ec;
+  --profit-text: #076b47;
+  --loss: #d92d20;
+  --loss-soft: #fdecea;
+  --loss-text: #b42318;
+
+  /* Lines and inputs */
+  --border: #aecbeb;
+  --border-strong: #83b0e1;
+  --divider: #e1ecf7;
+  --input-bg: #ffffff;
+  --input-border: #aecbeb;
+
+  /* Shape */
+  --radius: 6px;
+  --radius-lg: 8px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #10111f;
+  --surface: #191a2b;
+  --surface-2: #202136;
+
+  --text: #f0efff;
+  --text-secondary: #c2c1dc;
+  --muted: #9292b0;
+
+  --primary: #9285ff;
+  --primary-soft: rgba(146, 133, 255, 0.14);
+
+  --profit: #39d6a0;
+  --profit-soft: rgba(57, 214, 160, 0.13);
+  --profit-text: #6de5b8;
+
+  --loss: #ff7186;
+  --loss-soft: rgba(255, 113, 134, 0.13);
+  --loss-text: #ff9aaa;
+
+  --border: #303148;
+  --border-strong: #41425e;
+  --divider: #292a40;
+  --input-bg: #151627;
+  --input-border: #393a54;
+}
