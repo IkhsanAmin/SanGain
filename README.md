@@ -10,7 +10,7 @@ The desktop version of SanGain, featuring the main stock profit calculator inter
 ### Mobile View
 The responsive mobile version of SanGain, optimized for a seamless experience on smaller screens.
 
-![SanGain Mobile Preview](assets/images/preview2.png?v=2)
+![SanGain Mobile Preview](assets/images/mobile-preview.png)
 
 SanGain is a stock profit and loss estimation calculator designed for the Indonesian stock market (IDX/BEI). It calculates transaction results after applying customizable buy and sell broker fees, with additional target price and break-even analysis tools.
 
